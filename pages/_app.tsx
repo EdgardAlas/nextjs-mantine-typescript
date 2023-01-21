@@ -1,6 +1,24 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import { ThemeProvider } from '@/components/layout';
+import type { AppProps } from 'next/app';
+import '@/styles/globals.css';
+import { DefaultSeo } from 'next-seo';
+import { Inter } from '@next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <style jsx global>{`
+        html {
+          font-family: ${inter.style.fontFamily};
+          --font-family: ${inter.style.fontFamily};
+        }
+      `}</style>
+      <DefaultSeo title='NextJS + Mantine + Typescript' />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </>
+  );
 }
